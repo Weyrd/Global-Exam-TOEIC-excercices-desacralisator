@@ -1,5 +1,5 @@
 /****************
-*    Config     *
+ *    Config     *
 *****************/
 const answer_time = 100 //en millisecondes (200ms minimum)
 const percentage_good_answer = 100 // entre 0% et 100%
@@ -36,8 +36,6 @@ function autoAnswer(params) {
         }).then(response => {
             return response.json()
         }).then(data => {
-            //log
-            console.log("Data receveid : " + data)
             json_all_answer = {
                 "answers": [],
                 "examPartId": parseInt((window.location.href).split("/").slice(-1).join("/"))
@@ -55,6 +53,11 @@ function autoAnswer(params) {
                             json_all_answer["answers"].push({
                                 "id": result[i]["id"],
                                 "answers": [element["id"]]
+                            });
+                        } else if (element["name"] != null) {
+                            json_all_answer["answers"].push({
+                                "id": result[i]["id"],
+                                "answers": [element["name"]]
                             });
                         }
                     }
