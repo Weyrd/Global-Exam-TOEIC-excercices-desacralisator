@@ -62,7 +62,6 @@ function autoAnswer(params) {
                     lenght_answer = answer.length
                     json_all_answer["answers"].push({
                         "id": result[i]["id"],
-                        // get random answer
                         "answers": [answer[Math.floor(Math.random() * lenght_answer)]["id"]]
                     });
                 }
@@ -93,15 +92,10 @@ function autoAnswer(params) {
                 console.log("Request complete! response:", data);
                 if (data["props"]["flash"] != null) {
                     if (data["props"]["flash"]["success"] != null) {
-                        //log success
                         console.log(data["props"]["flash"]["success"]);
-                        //get the number in this string '/training/activity/21550199/result'
-
                         activityNumber = data["url"].split("/").slice(-2, -1).join("/")
                         toUrl = "https://exam.global-exam.com/exam/activity/" + activityNumber + "/result"
-
                         window.location.href = toUrl
-                        //window.location.href = "https://exam.global-exam.com"
                         running = false
                     } else if (data["props"]["flash"]["errors"] != null) {
                         console.log("Error : " + data["props"]["flash"]["errors"][0]);
