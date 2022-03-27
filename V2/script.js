@@ -1,8 +1,8 @@
 /****************
 *    Config     *
 *****************/
-const answer_time = 200 //en millisecondes (200ms minimum)
-const percentage_good_answer = 200 // entre 0% et 100%
+const answer_time = 35 //en millisecondes (35ms minimum)
+const percentage_good_answer = 100 // entre 0% et 100%
 
 
 /***************************
@@ -61,16 +61,23 @@ function autoAnswer(params) {
                         }
                     }
                 } else {
-                    lenght_answer = answer.length
-                    json_all_answer["answers"].push({
-                        "id": result[i]["id"],
-                        "answers": [answer[Math.floor(Math.random() * lenght_answer)]["id"]]
-                    });
+                    for (let j = 0; j < answer.length; j++) {
+                        element = answer[j];
+                        if (element["is_right_answer"] == false) {
+                            json_all_answer["answers"].push({
+                                "id": result[i]["id"],
+                                "answers": [element["id"]]
+                            });
+                            break;
+                        } 
+                    }
+
                 }
             }
             //console.log(json_all_answer);
-
-            post_reponse(json_all_answer);
+            setTimeout(() => {
+                post_reponse(json_all_answer);
+            }, answer_time*result.length);
         });
     }
 }
@@ -114,9 +121,7 @@ function post_reponse(json_all_answer) {
         }
 
         window.history.pushState(null, null, data["url"]);
-        setTimeout(() => {
-            autoAnswer()
-        }, answer_time);
+        autoAnswer()
 
     });
 
