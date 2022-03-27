@@ -1,8 +1,8 @@
 /****************
  *    Config     *
 *****************/
-const answer_time = 100 //en millisecondes (200ms minimum)
-const percentage_good_answer = 100 // entre 0% et 100%
+const answer_time = 200 //en millisecondes (200ms minimum)
+const percentage_good_answer = 200 // entre 0% et 100%
 
 
 /***************************
@@ -47,14 +47,14 @@ function autoAnswer(params) {
                 answer = result[i]["exam_answers"];
                 if (random()) {
                     for (let j = 0; j < answer.length; j++) {
-
+                        console.log(answer[j]);
                         element = answer[j];
                         if (element["is_right_answer"] == true) {
                             json_all_answer["answers"].push({
                                 "id": result[i]["id"],
                                 "answers": [element["id"]]
                             });
-                        } else if (element["name"] != null) {
+                        } else if (element["numbering"] == null) {
                             json_all_answer["answers"].push({
                                 "id": result[i]["id"],
                                 "answers": [element["name"]]
@@ -71,7 +71,14 @@ function autoAnswer(params) {
             }
             console.log(json_all_answer);
 
-            fetch((window.location.href).split("/").slice(0, -2).join("/") + "/next", {
+            post_reponse(json_all_answer);
+        });
+    }
+}
+
+
+function post_reponse(json_all_answer) {
+    fetch((window.location.href).split("/").slice(0, -2).join("/") + "/next", {
                 method: "POST",
                 headers: {
                     "Cookie": "global_exam_prod_session=" + (document.cookie).split("; ").find(row => row.startsWith("XSRF-TOKEN-PROD")).split("=")[1],
@@ -115,7 +122,6 @@ function autoAnswer(params) {
 
 
             });
-        });
-    }
+    
 }
 autoAnswer()
