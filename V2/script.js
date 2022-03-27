@@ -1,18 +1,18 @@
 /****************
- *    Config     *
- *****************/
+*    Config     *
+*****************/
 const answer_time = 200 //en millisecondes (200ms minimum)
 const percentage_good_answer = 200 // entre 0% et 100%
 
 
 /***************************
- *    X-Inertia-Version     *
- ****************************/
+*    X-Inertia-Version     *
+****************************/
 var xinertiaVers = "38f0bec14f48093a1b4127419a8cdc63"
 
 /*****************************
- *    Script do not touch     *
- ******************************/
+*    Script do not touch     *
+******************************/
 function random() {
     randomNum = Math.floor(Math.random() * (100 - 0 + 1) + 0);
     if (randomNum > percentage_good_answer) {
