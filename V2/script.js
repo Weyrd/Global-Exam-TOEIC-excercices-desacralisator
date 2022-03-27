@@ -47,7 +47,6 @@ function autoAnswer(params) {
                 answer = result[i]["exam_answers"];
                 if (random()) {
                     for (let j = 0; j < answer.length; j++) {
-                        console.log(answer[j]);
                         element = answer[j];
                         if (element["is_right_answer"] == true) {
                             json_all_answer["answers"].push({
@@ -69,7 +68,7 @@ function autoAnswer(params) {
                     });
                 }
             }
-            console.log(json_all_answer);
+            //console.log(json_all_answer);
 
             post_reponse(json_all_answer);
         });
@@ -99,7 +98,7 @@ function post_reponse(json_all_answer) {
     }).then(response => {
         return response.json()
     }).then(data => {
-        console.log("Request complete! response:", data);
+        //console.log("Request complete! response:", data);
         if (data["props"]["flash"] != null) {
             if (data["props"]["flash"]["success"] != null) {
                 console.log(data["props"]["flash"]["success"]);
