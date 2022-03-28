@@ -5,11 +5,6 @@ const answer_time = 35 //en millisecondes (35ms minimum)
 const percentage_good_answer = 100 // entre 0% et 100%
 
 
-/***************************
- *    X-Inertia-Version     *
- ****************************/
-var xinertiaVers = $inertia.page.version
-
 /*****************************
  *    Script do not touch     *
  ******************************/
@@ -95,7 +90,7 @@ function post_reponse(json_all_answer) {
       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36",
       'Content-Type': 'application/json;charset=UTF-8',
       "x-inertia": "true",
-      "x-inertia-version": xinertiaVers,
+      "x-inertia-version": $inertia.page.version,
       "Origin": "https://exam.global-exam.com"
     },
 
