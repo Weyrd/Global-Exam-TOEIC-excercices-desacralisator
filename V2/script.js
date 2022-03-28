@@ -105,6 +105,7 @@ function post_reponse(json_all_answer) {
         activityNumber = data["url"].split("/").slice(-2, -1).join("/")
         toUrl = "https://exam.global-exam.com/exam/activity/" + activityNumber + "/result"
         window.location.href = toUrl
+        //window.history.pushState(null, null, toUrl);
         running = false
       } else if (data["props"]["flash"]["errors"] != null) {
         console.log("Error : " + data["props"]["flash"]["errors"][0]);
@@ -120,3 +121,18 @@ function post_reponse(json_all_answer) {
 
 }
 autoAnswer()
+
+
+function get_activities() {
+  const fetchPromise = fetch("https://exam.global-exam.com/training/activity/20680631/content/10080", {
+    "headers": {
+      "x-inertia": "true",
+      "x-inertia-version": $inertia.page.version,
+    },
+    "method": "GET",
+  }).then(response => {
+    return response.json()
+  }).then(data => {
+    console.log(data);
+  });
+}
